@@ -1,0 +1,4 @@
+{
+    aluno1: {nome : 'lourival', idade : 35},
+    aluno2: {nome : 'francisco', idade : 25}
+}

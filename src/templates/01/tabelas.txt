@@ -1,0 +1,13 @@
+{
+	tabelas: [
+		{
+			nome : 'USUARIO',
+			nomeCamel : 'Usuario',
+			propriedades : [
+				['ID', 'Id', 'BIGINT', 'F', 'T'],
+				['EMAIL', 'Email', 'VARCHAR(100)', 'F', 'T'],	
+				['NOME', 'Nome', 'VARCHAR(100)', 'F', 'T']
+			]
+		}
+	]
+}

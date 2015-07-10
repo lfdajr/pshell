@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+</head>
+<body bgcolor="white">
+    <h2>Pleno Shell (pshell)</h2>
+ 
+  O pshell é um aplicativo de utilização simples, e que pode ser
+  expandido para facilitar a automação de tarefas. Todos os comandos do pshell
+  são métodos de classes Java que podem ser acionados a partir da interface-padrão
+  do aplicativo. Qualquer classe Java e seus métodos poderão ser
+  chamados via pshell.<br>
+  
+  <h2>Iniciando o pshell</h2>
+    Para inicializar o pshell abra uma linha de comando e digite: 
+    <ul><b>java -jar PlenoShell.jar</b></ul>
+    Quando o pshell iniciar, o usuário perceberá uma linha de comando disponível.
+    
+    Nesta linha de comando, existe a informação sobre a classe Java que está sendo utilizada
+    no momento. Digite:
+    <ul><b>versao</b></ul>
+    O usuário perceberá que foi exibida na tela a versão que está sendo utilizada do pshell. Veja a classe pshell.base.ShellBaseClass para
+    saber os principais comandos do pshell.
+    
+    <h2>Formato dos comandos pshell</h2>
+    Os comandos pshell devem possuir um dos seguintes formatos:
+    <ul><li>comando</li></ul>
+    <ul><li>comando arg1 arg2 arg3 ...</li></ul>
+    Para alguns comandos, <b>set</b> por exemplo, a separação por espaço em branco entre os argumentos poderá não ser adequada. 
+    Neste caso, o pshell fornece uma maneira ao usuário para que informe ao aplicativo que aquela seqüência de caracteres
+    faz parte de apenas um argumento. Ex.:
+    <ul><li>set load [use pshell.base.ShellDBBaseClass]</li></ul>
+    Neste comando, o usuário está informando para o pshell que o argumento <b>use pshell.base.ShellDBBaseClass</b> faz parte de um 
+    único argumento, e não dois como seria esperado se não fossem utilizados os colchetes.
+    
+    @author Lourival Almeida
+    @version 1.6.3
+
+</body>
+</html>

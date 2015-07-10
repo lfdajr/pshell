@@ -1,0 +1,24 @@
+{
+    tabelas: [
+        {
+            nome : 'AGENDA',
+            propriedades : [
+                    ['ID', 'BIGINT', 'UNSIGNED', 'NOT NULL', 'AUTO_INCREMENT'] , 
+                    ['COR', 'VARCHAR(45)', '', 'NOT NULL', ''] , 
+                    ['DATAFIM', 'DATETIME', '', 'NOT NULL', ''] , 
+                    ['DATAINICIO', 'DATETIME', '', 'NOT NULL', ''] , 
+                    ['DESCRICAO', 'VARCHAR(100)', '', 'NOT NULL', ''] , 
+                    ['PERIODICIDADE', 'INTEGER', 'UNSIGNED', 'NOT NULL', ''] , 
+                    ['COMPROMISSO', 'BIGINT', 'UNSIGNED', 'NOT NULL', ''] , 
+                    ['CONDOMINIO', 'BIGINT', 'UNSIGNED', 'NOT NULL', ''] , 
+                    ['UNIDADE', 'BIGINT', 'UNSIGNED', 'NOT NULL', ''] 
+            ],
+            pks : ['ID'],
+            fks : [
+                    ['COMPROMISSO', 'COMPROMISSO', 'ID'] ,                             
+                    ['CONDOMINIO', 'CONDOMINIO', 'ID'] ,                             
+                    ['UNIDADE', 'UNIDADE', 'ID']                             
+            ]
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="PlenoShell" default="default" basedir=".">
+    <description>Builds, tests, and runs the project PlenoShell.</description>
+    <import file="nbproject/build-impl.xml"/>
+    
+        <target name="-post-compile">
+            <copy todir="dist/templates">
+                <fileset dir="src/templates"/>
+            </copy>
+            
+            <copy todir="dist" file="executar.sh"/>
+            <copy todir="dist" file="unir.sh"/>
+            <copy file="build/classes/pshell/base/default.properties" tofile="build/pshell.properties"/>
+            <chmod file="dist/executar.sh" perm="700"/>
+            <chmod file="dist/unir.sh" perm="700"/>
+        </target>
+
+</project>

@@ -1,0 +1,99 @@
+package ${pack};
+
+import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlTransient;
+
+@Entity
+@Table(name = "$tabela.nome")
+public class $tabela.nomeCamelCase implements Serializable {
+    
+    private static final long serialVersionUID = 1L;
+
+    
+#foreach ($campo in $tabela.campos)
+    #if ($campo.chaveEstrangeira)
+        @JoinColumn(name = "$campo.nome", referencedColumnName = "$campo.chaveEstrangeira.nome")
+        @ManyToOne(optional = false, fetch = FetchType.LAZY)
+        private $campo.chaveEstrangeira.tabelaCamelCase $campo.chaveEstrangeira.tabelaLowerCamelCase
+    #elseif ($campo.chavePrimaria)
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Basic(optional = false)
+        @Column(name = "$campo.nome")
+        private $campo.tipoJava $campo.nomeLowerCamelCase;
+    #else
+        #if ($campo.isNotNull()) 
+        @Basic(optional = false) 
+        #end
+        #if ($campo.testeCampoData()) 
+        $campo.testeCampoData() 
+        @Column(name = "$campo.nome")
+        #else
+        @Column(name = "$campo.nome")
+        #end
+        private $campo.tipoJava $campo.nomeLowerCamelCase;
+    #end
+    
+#end
+
+    public ${tabela.nomeCamelCase}() {
+    }
+
+#foreach ($campo in $tabela.campos)
+    #if ($campo.chaveEstrangeira)
+    public $campo.chaveEstrangeira.tabelaCamelCase get${campo.chaveEstrangeira.tabelaCamelCase}() {
+        return $campo.chaveEstrangeira.tabelaLowerCamelCase;
+    }
+
+    public void set${campo.chaveEstrangeira.tabelaCamelCase}($campo.chaveEstrangeira.tabelaCamelCase $campo.chaveEstrangeira.tabelaLowerCamelCase) {
+        this.$campo.chaveEstrangeira.tabelaLowerCamelCase = $campo.chaveEstrangeira.tabelaLowerCamelCase;
+    }
+    #else
+    public $campo.tipoJava get${campo.nomeCamelCase}() {
+        return $campo.nomeLowerCamelCase;
+    }
+
+    public void set${campo.nomeCamelCase}($campo.tipoJava $campo.nomeLowerCamelCase) {
+        this.$campo.nomeLowerCamelCase = $campo.nomeLowerCamelCase;
+    }
+    #end
+#end
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof $tabela.nomeCamel)) {
+            return false;
+        }
+        $tabela.nomeCamel other = ($tabela.nomeCamel) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "${tabela.nomeCamelCase}[ id=" + id + " ]";
+    }
+    
+}

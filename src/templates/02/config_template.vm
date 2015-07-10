@@ -1,0 +1,16 @@
+{
+        nome : '$tabela.nome',
+        propriedades : [
+                #foreach ($campo in $tabela.campos)
+                ['$campo.nome', '$campo.tipo', '$campo.unsigned', '$campo.notNull', '$campo.autoIncremento'] #if( $foreach.hasNext ), #end
+
+                #end
+        ],
+        pks : [$tabela.getPksStringToTemplate()],
+        fks : [
+            #foreach ($fk in $tabela.fks)
+            ['$fk.get(0)', '$fk.get(1)', '$fk.get(2)'] #if( $foreach.hasNext ), #end
+
+            #end
+        ]
+} #if( $foreach.hasNext ), #end

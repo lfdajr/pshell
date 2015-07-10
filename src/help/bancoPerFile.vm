@@ -1,0 +1,96 @@
+<map version="0.8.1">
+    <node TEXT="$tabela.nome">
+
+        #if($tabela.anotacao)
+            <node COLOR="#999999" FOLDED="true" POSITION="right" TEXT="Descrição da Tabela">
+                <font NAME="SansSerif" SIZE="10"/>
+                <node COLOR="#669900" TEXT="$tabela.anotacao"/>
+            </node>
+        #else 
+            <node COLOR="#999999" FOLDED="true" POSITION="right" TEXT="Descrição da Tabela">
+                <font NAME="SansSerif" SIZE="10"/>
+                <node COLOR="#ff0000" TEXT="Documentação Pendente"/> 
+            </node>            
+        #end
+
+        <node COLOR="#999999" TEXT="Colunas" FOLDED="true" POSITION="right">
+            <font NAME="SansSerif" SIZE="10"/>
+            #foreach ($coluna in $tabela.colunas)
+            <node TEXT="$coluna.nome" FOLDED="true" ID="$tabela.nome.$coluna.nome">
+
+                #if($coluna.anotacao)
+                    <node COLOR="#999999" TEXT="Descrição da Coluna" FOLDED="true">
+                        <font NAME="SansSerif" SIZE="10"/>
+                        <node COLOR="#669900" TEXT="$coluna.anotacao"/>
+                    </node>
+                #else 
+                    <node COLOR="#999999" TEXT="Descrição da Coluna" FOLDED="true">
+                        <font NAME="SansSerif" SIZE="10"/>
+                        <node COLOR="#ff0000" TEXT="Documentação Pendente"/> 
+                    </node>
+                #end
+
+                #if($coluna.chavePrimaria == true) 
+                    #*<node COLOR="#999999" TEXT="Chave Primária" FOLDED="true">
+                        <font NAME="SansSerif" SIZE="10"/>
+                        <node COLOR="#669900" TEXT="Sim"/> 
+                    </node>*#
+                    <icon BUILTIN="password"/>
+                #else
+                    #*<node COLOR="#999999" TEXT="Chave Primária" FOLDED="true">
+                        <font NAME="SansSerif" SIZE="10"/>
+                        <node COLOR="#669900" TEXT="Não"/> 
+                    </node>*#
+                #end
+
+
+                #if($coluna.nulo == 0) 
+                    #*<node COLOR="#999999" TEXT="Permite Nulos" FOLDED="true">
+                        <font NAME="SansSerif" SIZE="10"/>
+                        <node COLOR="#669900" TEXT="Sim"/> 
+                    </node>*#
+                    <icon BUILTIN="button_cancel"/> 
+                #else
+                    #*<node COLOR="#999999" TEXT="Permite Nulos" FOLDED="true">
+                        <font NAME="SansSerif" SIZE="10"/>
+                        <node COLOR="#669900" TEXT="Não"/> 
+                    </node>*#
+                #end
+
+                <node COLOR="#999999" TEXT="Tipo" FOLDED="true">
+                    <font NAME="SansSerif" SIZE="10"/>
+                    <node COLOR="#669900" TEXT="$coluna.tipo ($coluna.tamanho)"/>
+                </node>
+
+                #if($coluna.autoIncremento == true) 
+                    <node COLOR="#999999" TEXT="Auto-Incremento" FOLDED="true">
+                        <font NAME="SansSerif" SIZE="10"/>
+                        <node COLOR="#669900" TEXT="Sim"/> 
+                    </node>
+                #else
+                    <node COLOR="#999999" TEXT="Auto-Incremento" FOLDED="true">
+                        <font NAME="SansSerif" SIZE="10"/>
+                        <node COLOR="#669900" TEXT="Não"/> 
+                    </node>
+                #end
+
+                #if($coluna.chaveEstrangeira.nome)
+                  <node COLOR="#999999" TEXT="Chave Estrangeira" FOLDED="true">
+                        <font NAME="SansSerif" SIZE="10"/>
+                        <node COLOR="#669900" TEXT="[$coluna.chaveEstrangeira.tabela.nome].[$coluna.chaveEstrangeira.nome]" LINK="${coluna.chaveEstrangeira.tabela.nome}.mm"/>
+                    </node>
+                    <icon BUILTIN="messagebox_warning"/>
+                #end
+
+            </node>
+            #end
+        </node>
+
+        <node TEXT="Legenda" FOLDED="true" POSITION="left" COLOR="#999999">
+            <font NAME="SansSerif" SIZE="10"/>
+            <node TEXT="Chave primária da tabela."><icon BUILTIN="password"/></node>            
+            <node TEXT="Campo obrigatório. Não permite valores nulos."><icon BUILTIN="button_cancel"/></node>
+            <node TEXT="Chave estrangeira. Indicado por [tabela].[coluna]."><icon BUILTIN="messagebox_warning"/></node>
+        </node>        
+    </node>
+</map>

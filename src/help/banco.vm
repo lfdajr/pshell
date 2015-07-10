@@ -1,0 +1,27 @@
+<map version="0.8.1">
+    <node TEXT="$banco_dados.nome">
+        <node POSITION="right" TEXT="Tabelas" FOLDED="true">
+            #foreach ($tabela in $banco_dados.tabelas)
+            <node TEXT="$tabela.nome" FOLDED="true">
+                #if($tabela.anotacao) <node TEXT="$tabela.anotacao"><icon BUILTIN="messagebox_warning"/></node> #else <node COLOR="#ff0000" TEXT="Documentação Pendente"/> #end
+                #foreach ($coluna in $tabela.colunas)
+                <node TEXT="$coluna.nome" FOLDED="true" ID="$tabela.nome.$coluna.nome">
+                    #if($coluna.anotacao) <node TEXT="$coluna.anotacao"><icon BUILTIN="messagebox_warning"/></node> #else <node COLOR="#ff0000" TEXT="Documentação Pendente"/> #end
+                    #if($coluna.nulo == 0) <icon BUILTIN="button_cancel"/> #end
+                    #if($coluna.autoIncremento == true) <node TEXT="Coluna auto-incremento"/> #end
+                    <node TEXT="$coluna.tipo ($coluna.tamanho)"/>
+                    #if($coluna.chaveEstrangeira.nome)<node TEXT="Chave Estrangeira: [$coluna.chaveEstrangeira.tabela.nome].[$coluna.chaveEstrangeira.nome]" LINK="#$coluna.chaveEstrangeira.tabela.nome.$coluna.chaveEstrangeira.nome"/><icon BUILTIN="password"/>#end
+                </node>
+                #end
+            </node>
+            #end
+        </node>
+        <node POSITION="right" TEXT="Stored Procedures" FOLDED="true">
+        </node>        
+        <node TEXT="Legenda" FOLDED="true" POSITION="left">
+            <node TEXT="Campo obrigatório. Não permite valores nulos."><icon BUILTIN="button_cancel"/></node>
+            <node TEXT="Descrição/documentação do campo."><icon BUILTIN="messagebox_warning"/></node>
+            <node TEXT="Chave estrangeira. Indicado por [tabela].[coluna]."><icon BUILTIN="password"/></node>
+        </node>        
+    </node>
+</map>

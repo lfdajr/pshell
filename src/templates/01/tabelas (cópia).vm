@@ -1,0 +1,22 @@
+#foreach ($tabela in $obj.tabelas)
+CREATE TABLE $tabela.nome (
+	#foreach ($prop in $tabela.propriedades)
+		$prop.get(0) $prop.get(2) #if ($prop.get(3) == "T") UNSIGNED #end #if($prop.get(4) == "T") NOT NULL #else NULL #end,
+	#end
+	
+	PRIMARY KEY ($tabela.pks.get(0)),
+
+	#foreach ($idx in $tabela.fks)
+	INDEX IDX_${tabela.nome}_$idx.get(0) ($idx.get(0) ASC) ,
+	#end
+
+	#foreach ($fk in $tabela.fks)
+	CONSTRAINT FK_${tabela.nome}_$fk.get(0)
+	 FOREIGN KEY ($fk.get(0))
+	    REFERENCES $fk.get(1) ($fk.get(2))
+	    ON DELETE NO ACTION
+	    ON UPDATE NO ACTION,
+	#end
+
+) ENGINE = InnoDB;
+#end
